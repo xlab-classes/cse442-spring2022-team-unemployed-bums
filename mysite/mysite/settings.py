@@ -75,12 +75,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cse442_2022_spring_team_a_db',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'USER': 'kevincou',
-        'PASSWORD': 'couchfamily1224',
+
     }
 }
 
