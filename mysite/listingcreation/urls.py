@@ -16,12 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from mysite.home import views as homeviews
-import views
+from . import views
 
+appname = 'listingcreation'
 urlpatterns = [
-    path('', homeviews.index),
-    path('listingcreation/', views.creationpage),
-    path('listingcreationsubmission/', views.listingsubmission),
-    path('admin/', admin.site.urls),
+    path('', views.creationpage, name = 'listingcreationindex'),
+    path('submission/', views.listingsubmission),
 ]

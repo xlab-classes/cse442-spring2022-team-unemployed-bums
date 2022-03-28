@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
-import listingForm
+from django.views.decorators.csrf import csrf_exempt
 
 #removed lines from contact function
 """ 
@@ -28,8 +28,10 @@ import listingForm
     form = SnippetForm()
     return render(request, 'form.html', {'form': listingForm})"""
 
+@csrf_exempt
 def listingsubmission(request):
-    return redirect('')
+    return redirect('http://127.0.0.1:8000/home/')
 
+@csrf_exempt
 def creationpage(request):
-    return render(request, 'static/listingcreation/listingcreationform')
+    return render(request, 'listingcreationform.html')
