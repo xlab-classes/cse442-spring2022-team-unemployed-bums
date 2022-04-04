@@ -1,0 +1,29 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<div style="width: 100%; display: flex; justify-content: center;" class="container-main">
+    <div style="width: 50vw; background-color: #208AE3; padding: 15px;" class="container-feed">
+
+        <form action="/listingcreation/submission/" method="post">
+            <label for="title">Listing Title: </label><br>
+            <input id="title" type="text" name="title-field" placeholder="Book Club" width="75px">
+            <br><br>
+            <label for="description">Description: </label><br>
+            <textarea name="description" cols="128" rows="20">
+            </textarea>
+            <br><br>
+            <label for="search-tags">Search Tags: </label><br>
+            <INPUT TYPE="Checkbox" Name="outdoors" Value ="Outdoors">Outdoors
+            <INPUT TYPE="Checkbox" Name="Sports" Value ="Sports">Sports
+            <INPUT TYPE="Checkbox" Name="Recreation" Value ="Recreation">Recreation
+            <INPUT TYPE="Checkbox" Name="Learning" Value ="Learning">Learning
+            <br><br>
+            <input type="submit" value="Create">
+        </form>
+    </div>
+</div>
+</html>
