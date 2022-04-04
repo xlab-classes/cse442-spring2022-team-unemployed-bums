@@ -80,12 +80,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'cse442_2022_spring_team_a_db',
-        'ENGINE': 'mysql.connector.django',
-        'USER': 'kevincou',
-        'PASSWORD': '50322488',
-	'HOST': 'oceanus.cse.buffalo.edu',
-	'PORT': '3306',
+        'NAME': 'mytestdb',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'test',
+        'PASSWORD': 'Secret_1234',
+        'HOST': 'localhost',
+        'PORT': '3306',
         'OPTIONS': {
           'autocommit': True,
         }, 
