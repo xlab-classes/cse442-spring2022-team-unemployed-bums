@@ -89,8 +89,38 @@ color: #000000;
 
   <h2 class="textOverPostRect"></h2>
 
-  <h2 class='placeHolderText'>This is where the description for
-  <br> an event will go</h2>
+  <!-- <h2 class='placeHolderText'>This is where the description for
+  <br> an event will go</h2> -->
+  <div style="display: flex; justify-content: center;">
+    <div style="position: absolute; top: 60%; display: flex; justify-content: center;">
+      <div style="width: 100%; display: flex; justify-content: center; top: 500px;" class="container-main">
+        <div style="width: 50vw; background-color: lightblue; padding: 15px;" class="container-feed">
+            <h1 style="font-size: 60px;">Your Events</h1>
+            <br>
+
+            {% for listing in listings %}
+                <div style="margin: 15px 0px; display: flex;" class="container-listing">
+                    <div class="left-content">
+                        <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
+                    </div>
+                    <div style="margin-left: 20px;" class="right-content">
+                        <h1>{{ listing.title }}</h1>
+                        <h5>Posted on {{ listing.date_posted }} by {{ listing.author }}</h5>
+                        <p>{{ listing.content }}</p>
+                        <p style="display: inline">{{ listing.event_date }}</p>
+                        <input style="display: inline; float: right;" type="button" value="Opt-Out">
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+
+  
           
 
 </body>
