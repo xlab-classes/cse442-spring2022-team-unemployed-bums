@@ -1,98 +1,84 @@
-{% extends 'profileHome/base.html' %}
-
-{% block content %}
+{% load static%}
 <!DOCTYPE html>
 <html>
-
 <head>
-<style>
-  .profileCir {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 169px;
-    top: 85px;
-    text-align: center;
-    align-items: center;
-    border-radius: 50%;
-    background-color: #C4C4C4 ;
-  }
-  .postsBackgroundLeft {
-    position: absolute;
-  width: 300px;
-  height: 250px;
-  left: 260px;
-  top: 300px;
+  <link rel="stylesheet" type="text/css" href="{% static 'profilepage/style.css' %}">
 
-  background: #C4C4C4;
-  border: 3px solid #000000;
-  box-sizing: border-box;
-  }
-  .postsBackgroundRight {
-    position: absolute;
-  width: 300px;
-  height: 250px;
-  left: 818px;
-  top: 300px;
-
-  background: #C4C4C4;
-  border: 3px solid #000000;
-  box-sizing: border-box;
-  }
-
-  .textOverPostRect{
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 0%;
-    height: 50px;
-    width: 300px;
-    left: 260px;
-top: 350px;
-
-    background: #FFFFFF;
-    border: 0.728597px solid #000000;
-    box-sizing: border-box;
-    box-shadow: 0px 1.45719px 1.45719px rgba(0, 0, 0, 0.25);
-  }
-  .placeHolderText {
-    position: absolute;
-left: 22.96%;
-right: 1.28%;
-top: 41.50%;
-bottom: 10.8%;
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 17.4863px;
-line-height: 20px;
-display: flex;
-align-items: center;
-text-align: center;
-
-color: #000000;
-
-  }
-</style>
 </head>
 
 <body>
-  <h2 class="profileCir">Profile Pic</h2>
-
-  <hr style="width:25%;"align:right;left:818px;>
-
-  <h2 class="postsBackgroundLeft"></h2>
-
-  <h2 class="postsBackgroundRight"></h2>
-
-  <h2 class="textOverPostRect"></h2>
-
-  <h2 class='placeHolderText'>This is where the description for
-  <br> an event will go</h2>
-          
+           
+  <body>
+    <ul>
+      <li style="float:left"><a href="/home">Home</a></li>
+      
+    <li style="float:right;padding:1px 32px"><a href="/profile/settings">Settings / Edit Profile</a></li>
+    </ul>
+  </body>
+  
+  
+  
+  
+  <h3 class="profileCir">Profile Pic Placeholder</h3>
+  
+  
+  
+  
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>My Posts</th>
+        <th>Posts I'm Interested In</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr>
+        <td>Place</td>
+        <td>Just until</td>
+      </tr>
+      
+   
+      <tr class="active-row">
+        <td>Holder</td>
+        <td>The Database is</td>
+      </tr>
+      
+      
+      <tr>
+        <td>For Now</td>
+        <td>Connected</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  
+  <table class="bioInterestsTable">
+    <tbody>
+      <tr>
+        <td>
+          User Bio  
+        </td>
+        <td>
+          Text Form
+        </td>
+      </tr>
+      
+      <tr>
+        <td>
+          Interests
+        </td>
+        <td>
+          User inputtttttt
+        </td>
+      </tr>
+    </tbody>
+  
+  
+  
+  
+  
 
 </body>
 </html>
-{% endblock content %}
