@@ -27,7 +27,7 @@ def loginpage(response):
         user = authenticate(response, username = username, password = password )
         if user is not None:
             login(response, user)
-            return redirect("home")
+            return redirect("/home")
         else:
             messages.info(response, "Username or Password is incorrect")
             return render(response, "Register/login.html")
