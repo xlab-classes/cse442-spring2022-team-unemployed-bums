@@ -138,6 +138,7 @@ CRISPY_TEMPLATE_PACK="bootstrap4"
 LOGIN_REDIRECT_URL = "/authenticated"
 
 # SMTP Email Configuration 
+DEFAULT_FROM_EMAIL = 'unemployedbumsnotification@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True

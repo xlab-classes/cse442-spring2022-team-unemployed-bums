@@ -1,6 +1,7 @@
 from cgitb import html
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -64,14 +65,26 @@ listings = [
     },
 ]
 
+def get_event_info():
+    return 'this is the event info'
+
 def index(request):
     context = {
             'listings': listings
         }
+    # current_user = request.user.email
+    # print(current_user)
     if request.method == 'GET':   
         return render(request, 'home/index.html', context)
     else:
         items = request.POST.items()
         key, value = items
-        print(key, value)
+        # send email to user here
+        send_mail(
+            subject='You RSVP\'d to an event!',
+            message=get_event_info(),
+            from_email='EVNT RSVP',
+            recipient_list=[request.user.email],
+        )
+        print(key, value, "sending rsvp email")
         return render(request, 'home/index.html', context)
