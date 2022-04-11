@@ -96,6 +96,20 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'NAME': 'cse442_2022_spring_team_a_db',
+#         'ENGINE': 'mysql.connector.django',
+#         'USER': 'kevincou',
+#         'PASSWORD': '50322488',
+#         'HOST': 'oceanus.cse.buffalo.edu',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#           'autocommit': True,
+#         },
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
