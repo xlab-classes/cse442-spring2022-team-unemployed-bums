@@ -11,17 +11,17 @@ def listingsubmission(request):
 
         if form.is_valid():
             title = form.cleaned_data["title"]
+            author = request.user
             description = form.cleaned_data["description"]
             outdoors = form.cleaned_data["outdoors"]
             sports = form.cleaned_data["sports"]
             recreation = form.cleaned_data["recreation"]
             learning = form.cleaned_data["learning"]
-            author = request.user
-            l = ListingCreationModel(title=title, author = author, description=description, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning)
+            l = ListingCreationModel(title=title, author=author, description=description, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning)
             l.save()
 
 
-    return redirect('http://127.0.0.1:8000/home/')
+    return redirect('/home')
 
 @csrf_exempt
 def creationpage(request):

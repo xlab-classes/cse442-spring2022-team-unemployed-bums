@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['128.205.32.39',
 		'www-student.cse.buffalo.edu',
-        'localhost', '127.0.0.1']
+        'localhost']
 
 
 # Application definition
@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'US/Eastern'
 
 USE_I18N = True
 
@@ -136,7 +136,7 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK="bootstrap4"
 
-LOGIN_REDIRECT_URL = "/authenticated"
+LOGIN_REDIRECT_URL = "/home"
 
 # SMTP Email Configuration 
 DEFAULT_FROM_EMAIL = 'unemployedbumsnotification@gmail.com'

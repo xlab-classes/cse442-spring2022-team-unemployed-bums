@@ -1,6 +1,6 @@
 from django import forms
 
-class CreateNewListing(forms.Form):
+class Tagsform(forms.Form):
     outdoors = forms.BooleanField(label="Outdoors", required=False)
     recreation = forms.BooleanField(label="Recreation", required=False)
     sports = forms.BooleanField(label="Sports", required=False)
