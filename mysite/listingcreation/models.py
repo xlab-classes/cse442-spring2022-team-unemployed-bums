@@ -8,7 +8,6 @@ monthchoices = [('1', '1'),('2', '2'),('3', '3'),('4', '4'),('5', '5'),('6', '6'
 yearchoices = [('2022', '2022'),('2023', '2023'),('2024', '2024')]
 
 class ListingCreationModel(models.Model):
-    #id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=200, default="anonymous")
     created_on = models.DateTimeField(default=timezone.now)
