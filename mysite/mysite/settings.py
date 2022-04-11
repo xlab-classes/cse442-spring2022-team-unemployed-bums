@@ -136,7 +136,7 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK="bootstrap4"
 
-LOGIN_REDIRECT_URL = "/authenticated"
+LOGIN_REDIRECT_URL = "/home"
 
 # SMTP Email Configuration 
 DEFAULT_FROM_EMAIL = 'unemployedbumsnotification@gmail.com'
