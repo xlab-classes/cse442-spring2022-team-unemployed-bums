@@ -94,7 +94,7 @@ You have RSVP'd to "{title}" - posted by {author}\n
 Description\n
 {content}\n
 \n
-Event Date {event_date}
+Event Date {eventdate}
 
 EVNT RSVP Notifications
             """
