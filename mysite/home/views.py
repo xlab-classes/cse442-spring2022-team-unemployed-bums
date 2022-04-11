@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 from listingcreation.views import ListingCreationModel
 from .forms import Tagsform
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -133,3 +134,34 @@ def index(request):
         )
         print(key, value, "sending rsvp email")
         return render(request, 'home/index.html', context)
+
+@csrf_exempt
+def filtered(request):
+    list_of_listings = ListingCreationModel.objects.all().values()
+    final_listings = []
+    form = Tagsform
+    context = {
+        'listings': final_listings,
+        'tagsform': form
+    }
+    if request.method == "POST":
+        form = Tagsform(request.POST)
+
+        if form.is_valid():
+            outdoors = form.cleaned_data["outdoors"]
+            sports = form.cleaned_data["sports"]
+            recreation = form.cleaned_data["recreation"]
+            learning = form.cleaned_data["learning"]
+
+            for listing in list_of_listings:
+                if(listing["outdoors"] == outdoors and listing["sports"] == sports and listing["recreation"] == recreation and listing["learning"] == learning):
+                    final_listings.append(listing)
+
+            return render(request, 'home/index.html', context)
+
+    else:
+        context2 = {
+        'listings': list_of_listings,
+        'tagsform': form
+    }
+        return render(request, 'home/index.html', context2)
