@@ -16,7 +16,8 @@ def listingsubmission(request):
             sports = form.cleaned_data["sports"]
             recreation = form.cleaned_data["recreation"]
             learning = form.cleaned_data["learning"]
-            l = ListingCreationModel(title=title, description=description, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning)
+            author = request.user
+            l = ListingCreationModel(title=title, author = author, description=description, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning)
             l.save()
 
 

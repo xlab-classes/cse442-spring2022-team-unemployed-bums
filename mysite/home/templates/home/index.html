@@ -27,6 +27,9 @@
             cursor: pointer;
             text-align: center;" onclick="location.href = '/listingcreation/';">Post an event</button>
         </div>
+        <div style="width: 100%; display: flex; justify-content: center;" id="search-tag-boxes">
+
+        </div>
         <div style="width: 100%; display: flex; justify-content: center;" class="container-main">
             <div style="width: 50vw; background-color: #208AE3; padding: 15px;" class="container-feed">
                 {% for listing in listings %}
@@ -40,7 +43,7 @@
                                 {% csrf_token %}
                                 <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
                                 <h5>Posted on {{ listing.date_posted }} by {{ listing.author }}</h5>
-                                <p>{{ listing.content }}</p>
+                                <p>{{ listing.description }}</p>
                                 <p style="display: inline">RSVP by {{ listing.event_date }}</p>
                                 <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
                                 <input style="display: inline; float: right;" type="submit" value="RSVP">
