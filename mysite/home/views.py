@@ -85,7 +85,7 @@ def get_event_info(username, listing_id):
         author = listing['author']
         title = listing['title']
         content = listing['description']
-        event_date = "temp date placeholder"
+        eventdate = "temp date placeholder"
 
         return (
             f"""Thank you for the RSVP {username}!\n
