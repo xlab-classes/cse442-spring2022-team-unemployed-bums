@@ -154,7 +154,13 @@ def filtered(request):
             learning = form.cleaned_data["learning"]
 
             for listing in list_of_listings:
-                if(listing["outdoors"] == outdoors and listing["sports"] == sports and listing["recreation"] == recreation and listing["learning"] == learning):
+                if(listing["outdoors"] == outdoors and outdoors == True):
+                    final_listings.append(listing)
+                elif(listing["sports"] == sports and sports == True):
+                    final_listings.append(listing)
+                elif(listing["recreation"] == recreation and recreation == True):
+                    final_listings.append(listing)
+                elif(listing["learning"] == learning and learning == True):
                     final_listings.append(listing)
 
             return render(request, 'home/index.html', context)
