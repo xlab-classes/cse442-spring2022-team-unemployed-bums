@@ -3,6 +3,7 @@ from email import message
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from listingcreation.views import ListingCreationModel
 
 # Create your views here.
 
@@ -100,9 +101,14 @@ EVNT RSVP Notifications
     return 'this is the event info'
 
 def index(request):
+    list_of_listings = ListingCreationModel.objects.all().values()
+    # print(list(context))
     context = {
-            'listings': listings
-        }
+        'listings': list_of_listings
+    }
+    # context = {
+    #         'listings': listings
+    #     }
     # current_user = request.user.email
     # print(current_user)
     if request.method == 'GET':   

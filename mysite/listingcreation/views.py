@@ -20,7 +20,7 @@ def listingsubmission(request):
             l.save()
 
 
-    return redirect('http://127.0.0.1:8000/home/')
+    return redirect('/home')
 
 @csrf_exempt
 def creationpage(request):
