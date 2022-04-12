@@ -1,6 +1,8 @@
 from django.urls import path
-from profilepage.views import Index
+from .views import profile, editProfile
 
 urlpatterns = [
-    path('', Index.as_view(), name='profile_index')
+    path('', profile, name="profile-page"),
+    #path('editprofile/', editProfile, name="edit-bio-interests")
+    path('editprofile/', editProfile, name="edit-bio-interests")
 ]

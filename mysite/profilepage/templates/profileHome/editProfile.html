@@ -1,0 +1,22 @@
+<html>
+  
+  <body>
+  
+  <h1>Edit Profile Bio and Interests Sections</h1>
+  <form action="" method="POST"> 
+    {% csrf_token %}
+    <label for="username">Username:</label><br>
+    <input type="text" class="field" palceholder="Enter Username" name="username"><br>
+    <label for="">Bio:</label><br>
+    <input type="text" class="field" palceholder="Bio" name="bio"><br>
+    <label for="">Interests:</label><br>
+    <input type="text" class="field" palceholder="Interests" name="interests"><br>
+    <label for="userfile">Upload your profile picture:</label><br>
+    <input type="file" id="userfile" name="userfile"><br>
+    <br>
+    <button type="submit" class="btn">Update Bio, Interests & Profile Pic</button>
+  </form>
+    
+  </body>
+  
+  </html>
