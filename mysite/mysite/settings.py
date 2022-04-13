@@ -56,6 +56,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_COOKIE_DOMAIN = 'None'
+
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
@@ -83,10 +85,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'mytestdb',
+        'NAME': 'daetestdb',
         'ENGINE': 'django.db.backends.mysql',
-        'USER': 'test',
-        'PASSWORD': 'Secret_1234',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
@@ -132,6 +134,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# parts needed for the image saving
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'profilePics')
+
 
 CRISPY_TEMPLATE_PACK="bootstrap4"
 

@@ -1,18 +1,38 @@
 from asyncio.windows_events import NULL
 from msilib.schema import CompLocator
-from django.shortcuts import render
+from tkinter import Image
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from .models import profilePicCounter, profiles
 from django.views.decorators.csrf import csrf_exempt
 import os.path
 import shutil
 
+from .forms import *
+
 def profile(request):
     return render(request, 'profileHome/profile.html')
 
 @csrf_exempt
+def editProfilePic(request):
+    #counter = profilePicCounter()
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = ImageForm()
+    return render(request, 'profileHome/pictureUpload.html', {'form' : form})
+
+def success(request):
+    return HttpResponse('successfully uploaded')
+
+@csrf_exempt
 def editProfile(request):
     
-    print("response = ", request)
 
     basepath = os.getcwd()
     print("HOME BASE = ", basepath)
@@ -21,7 +41,6 @@ def editProfile(request):
         if profiles.testfield:  #this works through the user login page because it saves the user's password on successful login then accesses 
                                 #their data table to update their information
             individual = profiles()
-            counter = profilePicCounter()
            
             if profiles.objects.filter(testfield=profiles.testfield).exists():
                 individual.testfield = profiles.objects.get(testfield=profiles.testfield)#I think this should work
@@ -33,32 +52,8 @@ def editProfile(request):
                 individual.bio = request.POST['bio']
                 individual.interests = request.POST['interests']
 
-                if not profiles.testfield:
-                    userfile = request.POST['userfile']
-                    
-                    add = False
-                    for x in userfile:
-                        if x == ".":
-                            add = True
-                        if not add:
-                            individual.imageName += x
-                        if add:
-                            individual.extension += x
-
-
-                    completeName = os.path.join(basepath, userfile)
-                    file1 = open(completeName, "w")
-                    #file1.write()
-                    file1.close()
                 
-                    hope = os.path.join(basepath, "profilepage\\images\\"+userfile)
-                    shutil.move(completeName, hope)
-
-                    print(userfile)
-                counter.count += 1
-                individual.imageID = counter.count
-                
-            infoUpdate = profiles(username=individual.username, bio=individual.bio, interests=individual.interests, extension=individual.extension, imageName=individual.imageName, imageID=individual.imageID, testfield=individual.testfield)
+            infoUpdate = profiles(username=individual.username, bio=individual.bio, interests=individual.interests)
             infoUpdate.save()
 
     return render(request, 'profileHome/editProfile.html', {})
