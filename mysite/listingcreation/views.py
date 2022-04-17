@@ -20,7 +20,8 @@ def listingsubmission(request):
             eventday = form.cleaned_data["eventday"]
             eventmonth = form.cleaned_data["eventmonth"]
             eventyear = form.cleaned_data["eventyear"]
-            eventdate = f"{eventmonth}/{eventday}/{eventyear}"
+            eventdate = "{} {} {}".format(eventmonth, eventday, eventyear)
+            print(request.user)
             l = ListingCreationModel(title=title, author=author, description=description, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate)
             l.save()
 

@@ -89,16 +89,7 @@ def get_event_info(username, listing_id):
         eventdate = listing['eventdate']
 
         return (
-            f"""Thank you for the RSVP {username}!\n
-You have RSVP'd to "{title}" - posted by {author}\n
-\n
-Description\n
-{content}\n
-\n
-Event Date {eventdate}
-
-EVNT RSVP Notifications
-            """
+            "Thank you for the RSVP {}!\nYou have RSVP'd to {} - posted by {}\n\nDescription\n{}\n\nEvent Date {}\nEVNT RSVP Notifications".format(username, title, author, content, eventdate)
         )
         
 
