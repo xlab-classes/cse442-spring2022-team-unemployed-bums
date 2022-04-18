@@ -1,6 +1,4 @@
 from django.db import models
-from django.utils import timezone
-# from django.contrib.auth import User
 
 class Searchtagsmodel(models.Model):
     outdoors = models.BooleanField()

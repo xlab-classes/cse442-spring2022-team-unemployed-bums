@@ -18,25 +18,13 @@ def register(response):
     else:
         form = RegisterForm()
 
-    return render(response, "Register/register.html", {"form": form})
+    return render(response, "registration/register.html", {"form": form})
 
-def loginpage(response):
-    if response.method == "POST":
-        username = response.POST.get('username')
-        password = response.POST.get('password')
-        user = authenticate(response, username = username, password = password )
-        if user is not None:
-            login(response, user)
-            return redirect("/home")
-        else:
-            messages.info(response, "Username or Password is incorrect")
-            return render(response, "Register/login.html")
-    return render(response, "Register/login.html")
 
 
 def authenticated(response):
-    return render(response, "Register/authenticated.html", {})
+    return render(response, "registration/authenticated.html", {})
 
 def registered(response):
-    return render(response, "Register/registered.html", {})
+    return render(response, "registration/registered.html", {})
 

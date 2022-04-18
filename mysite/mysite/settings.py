@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['128.205.32.39',
 # Application definition
 
 INSTALLED_APPS = [
+    'Register.apps.RegisterConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,11 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
-    'Register.apps.RegisterConfig',
     'profilepage.apps.ProfilepageConfig',
-    'UserLogin.apps.UserloginConfig',
     'home.apps.HomeConfig',
     'listingcreation.apps.ListingcreationConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -100,8 +100,8 @@ DATABASES = {
     'default': {
         'NAME': 'cse442_2022_spring_team_a_db',
         'ENGINE': 'mysql.connector.django',
-        'USER': 'kevincou',
-        'PASSWORD': '50322488',
+        'USER': 'jhliu4',
+        'PASSWORD': '50236162',
         'HOST': 'oceanus.cse.buffalo.edu',
         'PORT': '3306',
         'OPTIONS': {

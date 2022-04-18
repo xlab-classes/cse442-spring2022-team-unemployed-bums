@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Logout Page
+{% endblock %} 
+
+{% block content %}
+	<h2> You Have Successfully Logged Out </h2>
+	<div class ="border-top pt-3">
+		<small class ="text-muted">
+			<a class = "ml-2" href = "{% url 'login' %}"> Log in Again </a>
+		</small>
+	</div>
+{% endblock %} 
