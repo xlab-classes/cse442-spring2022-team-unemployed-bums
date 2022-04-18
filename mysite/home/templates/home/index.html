@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evnt | Home</title>
 
+    {% if message != "" %}
+    <script>
+        alert('{{message}}');
+        console.log('{{message}}')
+    </script>
+    {% endif %}
+
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
 </head>
 <body style="margin: 0px; padding: 0px; overflow-x: hidden; max-width: 100%;">
