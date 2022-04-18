@@ -6,6 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evnt | Home</title>
 
+    {% if message != "" %}
+    <script>
+        alert('{{message}}');
+        console.log('{{message}}')
+    </script>
+    {% endif %}
+
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
 </head>
 <body style="margin: 0px; padding: 0px; overflow-x: hidden; max-width: 100%;">
@@ -13,8 +20,12 @@
         <nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
             <ul style="width: 100%; list-style-type: none; margin: 0px; padding: 0px;">
                 <li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Home</a></li>
-                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Account</a></li>
-                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Login/Register</a></li>
+                {% if user.is_authenticated %}
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile">Account</a></li>
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/logout">Log Out</a></li>
+                {% else %}
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/login">Login/Register</a></li>
+                {% endif %}
             </ul>
         </nav>
         <div style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
@@ -25,7 +36,13 @@
             padding: 14px 28px;
             font-size: 16px;
             cursor: pointer;
-            text-align: center;">Post an event</button>
+            text-align: center;" onclick="location.href = '/listingcreation/';">Post an event</button>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: center;" id="search-tag-boxes">
+            <form action="/home/filter" method="post">
+                {{tagsform}}
+                <input type="submit" value="Filter">
+            </form>
         </div>
         <div style="width: 100%; display: flex; justify-content: center;" class="container-main">
             <div style="width: 50vw; background-color: #208AE3; padding: 15px;" class="container-feed">
@@ -34,12 +51,19 @@
                         <div class="left-content">
                             <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
                         </div>
+                        
                         <div style="margin-left: 20px;" class="right-content">
-                            <h1>{{ listing.title }}</h1>
-                            <h5>Posted on {{ listing.date_posted }} by {{ listing.author }}</h5>
-                            <p>{{ listing.content }}</p>
-                            <p style="display: inline">RSVP by {{ listing.event_date }}</p>
-                            <input style="display: inline; float: right;" type="button" value="RSVP">
+                            <form action="/home/" method="POST">
+                                {% csrf_token %}
+                                <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
+                                <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
+                                <p>{{ listing.description }}</p>
+                                <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
+                                <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                                <input style="display: inline; float: right;" type="submit" value="RSVP">
+                            </form>
+
+                            
                         </div>
                     </div>
                     <br>
