@@ -89,8 +89,26 @@ color: #000000;
 
   <h2 class="textOverPostRect"></h2>
 
-  <!-- <h2 class='placeHolderText'>This is where the description for
-  <br> an event will go</h2> -->
+  {% if is_following %}
+    <form action="remove_follower", method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="following" value="{{following}}" readonly>
+      <input type="hidden" name="follower" value="{{follower}}" readonly>
+      <!-- {{following}}
+      {{follower}} -->
+      <button class="btn profile-btn">Unfollow</button>
+    </form>
+  {% else %}
+    <form action="add_follower", method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="following" value="{{following}}" readonly>
+      <input type="hidden" name="follower" value="{{follower}}" readonly>
+      <!-- {{following}}
+      {{follower}} -->
+      <button class="btn profile-btn">Follow</button>
+    </form>
+  {% endif %}
+
   <div style="display: flex; justify-content: center;">
     <div style="position: absolute; top: 60%; display: flex; justify-content: center;">
       <div style="width: 100%; display: flex; justify-content: center; top: 500px;" class="container-main">

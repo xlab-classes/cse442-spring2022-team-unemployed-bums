@@ -21,7 +21,7 @@
             <ul style="width: 100%; list-style-type: none; margin: 0px; padding: 0px;">
                 <li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Home</a></li>
                 {% if user.is_authenticated %}
-                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile">Account</a></li>
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile/?user={{user.username}}">Account</a></li>
                 <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Log Out</a></li>
                 {% else %}
                 <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/login">Login/Register</a></li>
