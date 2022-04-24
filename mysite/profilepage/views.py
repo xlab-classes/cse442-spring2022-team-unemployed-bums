@@ -51,6 +51,9 @@ class Index(View):
         resp_following = request.GET.get('user')
         resp_follower = request.user.username
 
+        if resp_follower == "":
+            return render(request, 'profileHome/profile.html')
+
         if User.objects.filter(username=resp_following).exists():
             following = User.objects.get(username=resp_following)
             follower = User.objects.get(username=resp_follower)

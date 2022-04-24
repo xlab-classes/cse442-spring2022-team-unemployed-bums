@@ -79,6 +79,8 @@ color: #000000;
 </head>
 
 <body>
+
+  {%  if user.is_authenticated %}
   <h2 class="profileCir">Profile Pic</h2>
 
   <hr style="width:25%;"align:right;left:818px;>
@@ -138,7 +140,9 @@ color: #000000;
   </div>
   
   
-
+  {% else %}
+  Please log in to view
+  {% endif %}
   
           
 
