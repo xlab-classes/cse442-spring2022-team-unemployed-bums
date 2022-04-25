@@ -17,6 +17,8 @@ class ListingCreationModel(models.Model):
     sports = models.BooleanField()
     recreation = models.BooleanField()
     learning = models.BooleanField()
+    hidden = models.BooleanField(default=False)
+    rsvp = models.IntegerField(default = 0)
 
     def __str__(self):
         return self.title

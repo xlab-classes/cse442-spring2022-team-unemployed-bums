@@ -5,15 +5,17 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core.mail import send_mail
 from listingcreation.views import ListingCreationModel
+from listingcreation.views import rsvp
 from .forms import Tagsform
 from django.views.decorators.csrf import csrf_exempt
+from operator import itemgetter
 
 # Create your views here.
 
 listings = ListingCreationModel.objects.all().values()
 
+
 def get_event_info(username, listing_id):
-    
     listing = listings.get(id=int(listing_id))
 
     if listing:
@@ -23,19 +25,22 @@ def get_event_info(username, listing_id):
         eventdate = listing['eventdate']
 
         return (
-            "Thank you for the RSVP {}!\nYou have RSVP'd to {} - posted by {}\n\nDescription\n{}\n\nEvent Date {}\nEVNT RSVP Notifications".format(username, title, author, content, eventdate)
+            "Thank you for the RSVP {}!\nYou have RSVP'd to {} - posted by {}\n\nDescription\n{}\n\nEvent Date {}\nEVNT RSVP Notifications".format(
+                username, title, author, content, eventdate)
         )
-        
-
 
     return 'this is the event info'
+
 
 def index(request):
     list_of_listings = ListingCreationModel.objects.all().values()
     form = Tagsform
-
+    final_listings = []
+    for listing in list_of_listings:
+        if (listing["hidden"] == False):
+            final_listings.append(listing)
     context = {
-        'listings': list_of_listings,
+        'listings': final_listings,
         'tagsform': form,
         'message': "",
     }
@@ -44,6 +49,7 @@ def index(request):
         return render(request, 'home/index.html', context)
     else:
         if str(request.user) != "AnonymousUser":
+            rsvp(request)
             items = dict(list(request.POST.items()))
             print(items)
             key, value = items
@@ -61,15 +67,13 @@ def index(request):
             context['message'] = "You must log in to RSVP"
         return render(request, 'home/index.html', context)
 
+
 @csrf_exempt
 def filtered(request):
     list_of_listings = ListingCreationModel.objects.all().values()
     final_listings = []
+
     form = Tagsform
-    context = {
-        'listings': final_listings,
-        'tagsform': form
-    }
     if request.method == "POST":
         form = Tagsform(request.POST)
 
@@ -78,22 +82,53 @@ def filtered(request):
             sports = form.cleaned_data["sports"]
             recreation = form.cleaned_data["recreation"]
             learning = form.cleaned_data["learning"]
+            sort = form.cleaned_data["sortOption"]
 
             for listing in list_of_listings:
-                if(listing["outdoors"] == outdoors and outdoors == True):
-                    final_listings.append(listing)
-                elif(listing["sports"] == sports and sports == True):
-                    final_listings.append(listing)
-                elif(listing["recreation"] == recreation and recreation == True):
-                    final_listings.append(listing)
-                elif(listing["learning"] == learning and learning == True):
-                    final_listings.append(listing)
+                if (listing["hidden"] == False):
+                    outd = False
+                    sport = False
+                    rec = False
+                    learn = False
+                    if(outdoors == False and sports == False and recreation == False and learning == False):
+                        final_listings.append(listing)
+                    else:
+                        if(outdoors == True):
+                            if (listing["outdoors"] == outdoors):
+                                outd = True
+                        else:
+                            outd = True
+                        if (sports == True):
+                            if (listing["sports"] == sports):
+                                sport = True
+                        else:
+                            sport = True
+                        if (recreation == True):
+                            if (listing["recreation"] == recreation):
+                                recreation = True
+                        else:
+                            rec = True
+                        if (learning == True):
+                            if (listing["learning"] == learning):
+                                learn = True
+                        else:
+                            learn = True
+                        if(outd == True and sport == True and rec == True and learn == True):
+                            final_listings.append(listing)
+        if (sort == "mostpopular"):
+            final_listings.sort(key=itemgetter('rsvp'))
+        elif (sort == "leastpopular"):
+            final_listings.sort(key=itemgetter('rsvp'), reverse=True)
 
-            return render(request, 'home/index.html', context)
+        context = {
+            'listings': final_listings,
+            'tagsform': form
+        }
+        return render(request, 'home/index.html', context)
 
     else:
         context2 = {
-        'listings': list_of_listings,
-        'tagsform': form
-    }
+            'listings': list_of_listings,
+            'tagsform': form
+        }
         return render(request, 'home/index.html', context2)

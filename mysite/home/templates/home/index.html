@@ -62,6 +62,7 @@
                                 <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
                                 <p>{{ listing.description }}</p>
                                 <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
+                                <p>Number of People RSVP'd: {{ listing.rsvp }}</p>
                                 <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
                                 <input style="display: inline; float: right;" type="submit" value="RSVP">
                             </form>

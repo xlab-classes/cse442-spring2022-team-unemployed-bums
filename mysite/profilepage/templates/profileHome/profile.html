@@ -124,12 +124,16 @@ color: #000000;
                         <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
                     </div>
                     <div style="margin-left: 20px;" class="right-content">
-                      <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
-                      <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
-                      <p>{{ listing.description }}</p>
-                      <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
-                      <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+                        <form action="/listingcreation/hidelisting/" method="POST">
+                            <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
+                            <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
+                            <p>{{ listing.description }}</p>
+                            <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
+                            <p>Hidden to Others: {{ listing.hidden }}</p>
+                            <input style="display: inline; float: right;" type="submit" value="Hide Post">
+                            <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
                         <!-- <input style="display: inline; float: right;" type="button" value="Opt-Out"> -->
+                        </form>
                     </div>
                 </div>
                 <br>

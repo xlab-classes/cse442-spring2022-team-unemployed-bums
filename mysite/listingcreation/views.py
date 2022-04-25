@@ -32,3 +32,30 @@ def listingsubmission(request):
 def creationpage(request):
     form = CreateNewListing
     return render(request, 'listingcreationform.html', {"form":form})
+
+@csrf_exempt
+def hidepost(request):
+    listings = ListingCreationModel.objects.all().values()
+    items = dict(list(request.POST.items()))
+    listing = listings.get(id=int(items['listing_id']))
+    hidden = listing["hidden"]
+    print("post visibility before: " , hidden)
+    print("hidden type: " , type(hidden))
+    if(hidden == False):
+        ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(hidden="True")
+        print("hiding")
+    else:
+        ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(hidden="False")
+        print("showing")
+    newlistings = ListingCreationModel.objects.all().values()
+    newlisting = newlistings.get(id=int(items['listing_id']))
+    print("post visibility after: ", newlisting["hidden"])
+    return redirect('/home')
+
+def rsvp(request):
+    listings = ListingCreationModel.objects.all().values()
+    items = dict(list(request.POST.items()))
+    listing = listings.get(id=int(items['listing_id']))
+    count = int(listing["rsvp"]) + 1
+    ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(rsvp=count)
+    return None
