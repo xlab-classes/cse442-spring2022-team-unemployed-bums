@@ -81,16 +81,6 @@ color: #000000;
 <body>
 
   {%  if user.is_authenticated %}
-  <h2 class="profileCir">Profile Pic</h2>
-
-  <hr style="width:25%;"align:right;left:818px;>
-
-  <h2 class="postsBackgroundLeft"></h2>
-
-  <h2 class="postsBackgroundRight"></h2>
-
-  <h2 class="textOverPostRect"></h2>
-
   {% if is_following %}
     <form action="remove_follower", method="POST">
       {% csrf_token %}
