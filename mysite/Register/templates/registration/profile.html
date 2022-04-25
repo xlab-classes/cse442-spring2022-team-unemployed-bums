@@ -17,8 +17,56 @@
 		</div>
 	</div>
 
+	{% if is_following %}
+    <form action="remove_follower", method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="following" value="{{following}}" readonly>
+      <input type="hidden" name="follower" value="{{follower}}" readonly>
+      <!-- {{following}}
+      {{follower}} -->
+      <button class="btn profile-btn">Unfollow</button>
+    </form>
+  {% else %}
+    <form action="add_follower", method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="following" value="{{following}}" readonly>
+      <input type="hidden" name="follower" value="{{follower}}" readonly>
+      <!-- {{following}}
+      {{follower}} -->
+      <button class="btn profile-btn">Follow</button>
+    </form>
+  {% endif %}
+
+
 	        <fieldset class="form-group">
               		<legend class="border-bottom mb-4">User Posts</legend>
+					  <div style="display: flex; justify-content: center;">
+						<div style="position: absolute; top: 60%; display: flex; justify-content: center;">
+						  <div style="width: 100%; display: flex; justify-content: center; top: 500px;" class="container-main">
+							<div style="width: 50vw; background-color: white; padding: 15px;" class="container-feed">
+								<!-- <h1 style="font-size: 60px;">Your Events</h1> -->
+								<br>
+					
+								{% for listing in listings %}
+									<div style="margin: 15px 0px; display: flex;" class="container-listing">
+										<div class="left-content">
+											<img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
+										</div>
+										<div style="margin-left: 20px;" class="right-content">
+										  <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
+										  <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
+										  <p>{{ listing.description }}</p>
+										  <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
+										  <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+											<!-- <input style="display: inline; float: right;" type="button" value="Opt-Out"> -->
+										</div>
+									</div>
+									<br>
+								{% endfor %}
+							</div>
+						  </div>
+						</div>
+					  </div>
          	</fieldset>  
 	<a href="/home" class="ml-2">Home </a>
 
