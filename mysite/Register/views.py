@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import RegisterForm, UserUpdateForm, ProfileForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User 
 from django.contrib import messages
@@ -18,25 +18,41 @@ def register(response):
     else:
         form = RegisterForm()
 
-    return render(response, "Register/register.html", {"form": form})
+    return render(response, "registration/register.html", {"form": form})
 
-def loginpage(response):
-    if response.method == "POST":
-        username = response.POST.get('username')
-        password = response.POST.get('password')
-        user = authenticate(response, username = username, password = password )
-        if user is not None:
-            login(response, user)
-            return redirect("/home")
-        else:
-            messages.info(response, "Username or Password is incorrect")
-            return render(response, "Register/login.html")
-    return render(response, "Register/login.html")
 
 
 def authenticated(response):
-    return render(response, "Register/authenticated.html", {})
+    return render(response, "registration/authenticated.html", {})
 
 def registered(response):
-    return render(response, "Register/registered.html", {})
+    return render(response, "registration/registered.html", {})
+
+def userprofile(response):
+    return render(response, "registration/profile.html", {})
+
+
+def profile(response):
+    if response.method == 'POST':
+        user_form = UserUpdateForm(response.POST, instance=response.user)
+        profile_form = ProfileForm(response.POST,
+                                   response.FILES,
+                                   instance=response.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(response, 'Your account has been updated!')
+            return redirect('profile')
+
+    else:
+        user_form = UserUpdateForm(instance=response.user)
+        profile_form = ProfileForm(instance=response.user.profile)
+
+    context = {
+        'user_form': user_form,
+        'profile_form': profile_form
+    }
+
+    return render(response,'registration/edit_profile.html', context)
+
 

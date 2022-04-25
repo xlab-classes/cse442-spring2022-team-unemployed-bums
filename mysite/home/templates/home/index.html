@@ -1,5 +1,3 @@
-{% extends 'profileHome/base.html' %}
-{% block content %}
 {% load static %}
 <html lang="en">
 <head>
@@ -19,18 +17,17 @@
 </head>
 <body style="margin: 0px; padding: 0px; overflow-x: hidden; max-width: 100%;">
     <div style="display: block; width: 100%;" class="container-body;">
-        <!-- <nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
+        <nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
             <ul style="width: 100%; list-style-type: none; margin: 0px; padding: 0px;">
-                <li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="/home">Home</a></li>
+                <li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Home</a></li>
                 {% if user.is_authenticated %}
-                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile/?user={{user.username}}">Account</a></li>
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile">User Profile</a></li>
                 <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/logout">Log Out</a></li>
                 {% else %}
                 <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/login">Login/Register</a></li>
                 {% endif %}
             </ul>
-        </nav> -->
-        
+        </nav>
         <div style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
             <button style="display: block;
             width: 50%;
@@ -49,7 +46,7 @@
         </div>
         <div style="width: 100%; display: flex; justify-content: center;" class="container-main">
             <div style="width: 50vw; background-color: #208AE3; padding: 15px;" class="container-feed">
-                {% for listing in listings reversed %}
+                {% for listing in listings %}
                     <div style="margin: 15px 0px; display: flex;" class="container-listing">
                         <div class="left-content">
                             <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
@@ -73,11 +70,10 @@
                 {% endfor %}
             </div>
         </div>
-        <!-- <div style="display: flex; justify-content: space-around; height: 5vh; padding-top: 25px;">
+        <div style="display: flex; justify-content: space-around; height: 5vh; padding-top: 25px;">
             <input style="height: 25px;" type="button" value="Prev">
             <input style="height: 25px;" type="button" value="Next">
-        </div> -->
+        </div>
     </div>
 </body>
-{% endblock content%}
 </html>
