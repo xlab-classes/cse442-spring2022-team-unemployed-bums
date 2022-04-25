@@ -80,33 +80,33 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 # Using msql-connector-python version 8.0.20 
 
-# DATABASES = {
-#     'default': {
-#         'NAME': 'mytestdb',
-#         'ENGINE': 'django.db.backends.mysql',
-#         'USER': 'test',
-#         'PASSWORD': 'Secret_1234',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#           'autocommit': True,
-#         }, 
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'NAME': 'cse442_2022_spring_team_a_db',
-        'ENGINE': 'mysql.connector.django',
-        'USER': 'jhliu4',
-        'PASSWORD': '50236162',
-        'HOST': 'oceanus.cse.buffalo.edu',
+        'NAME': 'mytestdb',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'test',
+        'PASSWORD': 'Secret_1234',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
           'autocommit': True,
-        },
+        }, 
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'NAME': 'cse442_2022_spring_team_a_db',
+#         'ENGINE': 'mysql.connector.django',
+#         'USER': 'jhliu4',
+#         'PASSWORD': '50236162',
+#         'HOST': 'oceanus.cse.buffalo.edu',
+#         'PORT': '3306',
+#         'OPTIONS': {
+#           'autocommit': True,
+#         },
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
