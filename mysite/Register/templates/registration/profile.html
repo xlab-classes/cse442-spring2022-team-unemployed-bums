@@ -1,9 +1,8 @@
-{% extends "main/base.html" %} 
+{% extends "main/profilebase.html" %} 
 {% load crispy_forms_tags %}
 
 
 {% block content %}
-
   {%  if user.is_authenticated %}
 	<a href="{% url 'profile' %}" class="ml-2">Edit Profile </a>
 	<div class = "content-section">

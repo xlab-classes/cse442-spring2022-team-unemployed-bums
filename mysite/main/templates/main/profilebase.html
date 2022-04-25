@@ -9,7 +9,17 @@
 
  	<title>{% block title %}My site{% endblock %}</title>
     </head>
-    <body>
+    <body style="margin-top: 0px; width: 100%; overflow-x: hidden">
+		<nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
+			<ul style="width: 100%; list-style-type: none; margin: 0px; padding: 0px;">
+				<li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="/home">Home</a></li>
+				{% if user.is_authenticated %}
+				<li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile/?user={{user.username}}">Account</a></li>
+				<li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/logout">Log Out</a></li>
+				{% else %}
+				<li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/login">Login/Register</a></li>
+				{% endif %}
+		</ul></nav>
         <div id = "content", name = "content">
             <div class = "row justify-content-center">
                 <div class = "col-8">
