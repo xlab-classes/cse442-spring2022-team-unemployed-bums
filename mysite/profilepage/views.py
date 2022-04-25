@@ -1,3 +1,5 @@
+from ast import Pass
+import re
 from django.shortcuts import redirect, render
 from django.views import View
 from .models import Follow
@@ -44,6 +46,17 @@ def add_follower(request):
             print("User does not exist: {}".format(resp_following))
 
     return redirect('/profile/?user=' + resp_following)
+
+def deleteAccount(request):
+    if request.method == 'GET':
+        if User.objects.filter(username=request.GET.get('user')).exists():   
+            #deleteMe = User.objects.get(username = request.GET.get('user'))
+            #deleteMe.delete()
+            print("exists ... remove the comments to test deletion")
+            return render(request, 'profileHome/deleteAccount.html')
+        else:
+            print("Account doesn't exist")
+
 
 class Index(View):
     #def profile(request):
