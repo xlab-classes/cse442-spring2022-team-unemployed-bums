@@ -45,13 +45,13 @@ def listingsubmission(request):
             followers = []
             for follower_object in follower_objects:
                 followers.append(User.objects.get(id=follower_object.user.id))
-            print(followers)
-            send_mail(
-                subject="You followed {}, check out their latest post!".format(author),
-                message=get_event_info(request.user, l),
-                from_email="{} posted a new event!".format(author),
-                recipient_list=[follower.email for follower in followers],
-            )
+            if len(followers) > 0:
+                send_mail(
+                    subject="You followed {}, check out their latest post!".format(author),
+                    message=get_event_info(request.user, l),
+                    from_email="{} posted a new event!".format(author),
+                    recipient_list=[follower.email for follower in followers],
+                )
 
 
     return redirect('/home')
