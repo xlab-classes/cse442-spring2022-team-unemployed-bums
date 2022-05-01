@@ -30,12 +30,13 @@
                 {% endif %}
             </ul>
         </nav> -->
+        {% if listings|length > 0 %}
         
         <div class="btn create-btn" style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
             <button style="display: block;
             width: 50%;
             border: none;
-            background-color: #04AA6D;
+            background-color: #208AE3;
             padding: 14px 28px;
             font-size: 16px;
             cursor: pointer;
@@ -48,7 +49,7 @@
             </form>
         </div>
         <div style="width: 100%; display: flex; justify-content: center;" class="container-main">
-            <div style="width: 50vw; background-color: #208AE3; padding: 15px;" class="container-feed">
+            <div style="width: 50vw; padding: 15px;" class="container-feed">
                 {% for listing in listings reversed %}
                     <div style="margin: 15px 0px; display: flex;" class="container-listing">
                         <div class="left-content">
@@ -73,6 +74,21 @@
                 {% endfor %}
             </div>
         </div>
+        {% else %}
+        <div style="text-align:center; margin-top: 35vh">
+            <h1>No Posts Found</h1>
+            <div class="btn create-btn" style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
+                <button style="display: block;
+                width: 50%;
+                border: none;
+                background-color: #208AE3;
+                padding: 14px 28px;
+                font-size: 20px;
+                cursor: pointer;
+                text-align: center;" onclick="location.href = '/listingcreation/';">Post an event</button>
+            </div>
+        </div>
+        {% endif %}
         <!-- <div style="display: flex; justify-content: space-around; height: 5vh; padding-top: 25px;">
             <input style="height: 25px;" type="button" value="Prev">
             <input style="height: 25px;" type="button" value="Next">
