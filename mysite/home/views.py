@@ -10,17 +10,18 @@ from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
-listings = ListingCreationModel.objects.all().values()
+listings = ListingCreationModel.objects.all()
 
 def get_event_info(username, listing_id):
     
     listing = listings.get(id=int(listing_id))
+    print(f"listing: {type(listing)}")
 
     if listing:
-        author = listing['author']
-        title = listing['title']
-        content = listing['description']
-        eventdate = listing['eventdate']
+        author = listing.author.username
+        title = listing.title
+        content = listing.description
+        eventdate = listing.eventdate
 
         return (
             "Thank you for the RSVP {}!\nYou have RSVP'd to {} - posted by {}\n\nDescription\n{}\n\nEvent Date {}\nEVNT RSVP Notifications".format(username, title, author, content, eventdate)
@@ -31,8 +32,9 @@ def get_event_info(username, listing_id):
     return 'this is the event info'
 
 def index(request):
-    list_of_listings = ListingCreationModel.objects.all().values()
+    list_of_listings = ListingCreationModel.objects.all()
     form = Tagsform
+    
 
     context = {
         'listings': list_of_listings,

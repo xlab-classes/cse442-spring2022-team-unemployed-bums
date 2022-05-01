@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from .forms import CreateNewListing
 from .models import ListingCreationModel
+from django.contrib.auth.models import User
 
 @csrf_exempt
 def listingsubmission(request):
@@ -11,7 +12,7 @@ def listingsubmission(request):
 
         if form.is_valid():
             title = form.cleaned_data["title"]
-            author = request.user
+            author = User.objects.get(username=request.user)
             description = form.cleaned_data["description"]
             outdoors = form.cleaned_data["outdoors"]
             sports = form.cleaned_data["sports"]

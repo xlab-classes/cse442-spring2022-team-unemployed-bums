@@ -46,7 +46,8 @@ def userprofile(request):
 
         is_following = Follow.objects.filter(user=follower, following_user=following).exists()
 
-        listings = ListingCreationModel.objects.filter(author=resp_following)
+        author = User.objects.get(username=resp_following)
+        listings = ListingCreationModel.objects.filter(author=author.id)
         
         context = {
         'listings': listings,
@@ -105,6 +106,8 @@ def add_follower(request):
         resp = dict(list(request.POST.items()))
         resp_follower = resp['follower']
         resp_following = resp['following']
+
+        print(resp_follower, resp_following)
 
         if User.objects.filter(username=resp_following).exists():
             following = User.objects.get(username=resp_following)

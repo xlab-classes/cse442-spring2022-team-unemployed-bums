@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
 from django.utils import timezone
 
@@ -9,7 +10,8 @@ yearchoices = [('2022', '2022'),('2023', '2023'),('2024', '2024')]
 
 class ListingCreationModel(models.Model):
     title = models.CharField(max_length=200)
-    author = models.CharField(max_length=200, default="anonymous")
+    # author = models.CharField(max_length=200, default="anonymous")
+    author = models.ForeignKey(User, related_name="author", on_delete=models.CASCADE)
     created_on = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     eventdate = models.CharField(max_length=10, default="4/11/2022")
