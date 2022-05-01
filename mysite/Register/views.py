@@ -57,7 +57,7 @@ def userprofile(request):
         }
         return render(request, 'registration/profile.html', context)
     else:
-        return render(request, 'profileHome/user_not_found.html')
+        return render(request, 'registration/user_not_found.html')
 # return render(response, "registration/profile.html", {})
 
 
