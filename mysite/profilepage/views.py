@@ -49,13 +49,20 @@ def add_follower(request):
 
 def deleteAccount(request):
     if request.method == 'GET':
-        if User.objects.filter(username=request.GET.get('user')).exists():   
-            #deleteMe = User.objects.get(username = request.GET.get('user'))
-            #deleteMe.delete()
-            print("exists ... remove the comments to test deletion")
+        person = request.user
+        print(person)
+
+        if User.objects.filter(username = person).exists():
+
+            deleteMe = User.objects.get(username = request.user)
+            deleteMe.delete()
+            print("exists ... deletes without button press")
             return render(request, 'profileHome/deleteAccount.html')
         else:
             print("Account doesn't exist")
+            return render(request, 'profileHome/deleteAccount.html')
+
+    return render(request, 'profileHome/deleteAccount.html')
 
 
 class Index(View):
