@@ -10,31 +10,34 @@
 		<div class ="media">
 			<img class = "rounded-circle account-img" src="{{user.profile.image.url}}">
 			<div class ="media-body">
-				<h2 class = "account-heading">{{user.username}}</h2>
-				<p class="text-secondary">{{ user.email }}</p>
+				<h2 class = "account-heading">{{following}}</h2>
+				<p class="text-secondary">{{ following.email }}</p>
 			</div>
 		</div>
 	</div>
 
-	{% if is_following %}
-    <form action="remove_follower", method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="following" value="{{following}}" readonly>
-      <input type="hidden" name="follower" value="{{follower}}" readonly>
-      <!-- {{following}}
-      {{follower}} -->
-      <button class="btn profile-btn">Unfollow</button>
-    </form>
-  {% else %}
-    <form action="add_follower", method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="following" value="{{following}}" readonly>
-      <input type="hidden" name="follower" value="{{follower}}" readonly>
-      <!-- {{following}}
-      {{follower}} -->
-      <button class="btn profile-btn">Follow</button>
-    </form>
-  {% endif %}
+	{% if following != follower %}
+		{% if is_following %}
+			<form action="remove_follower", method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="following" value="{{following}}" readonly>
+			<input type="hidden" name="follower" value="{{follower}}" readonly>
+			<!-- {{following}}
+			{{follower}} -->
+			<button class="btn profile-btn">Unfollow</button>
+			</form>
+		{% else %}
+			<form action="add_follower", method="POST">
+			{% csrf_token %}
+			<input type="hidden" name="following" value="{{following}}" readonly>
+			<input type="hidden" name="follower" value="{{follower}}" readonly>
+			<!-- {{following}}
+			{{follower}} -->
+			<button class="btn profile-btn">Follow</button>
+			</form>
+		{% endif %}
+	{% endif %}
+
 
 
 	        <fieldset class="form-group">
