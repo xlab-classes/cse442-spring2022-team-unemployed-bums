@@ -58,6 +58,7 @@ urlpatterns = [
          name='password_reset_complete'),
     path('profile/add_follower', v.add_follower, name='add_follower'),
     path('profile/remove_follower', v.remove_follower, name='remove_follower'),
+    path('profile/delete_account', v.delete_account, name ="delete_account"),
     
 
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -16,6 +16,8 @@
 				{% if user.is_authenticated %}
 				<li style="float: right; display: inline; padding-left: 30px; padding-right: 12px;" class="nav-items"><a href="/profile/?user={{user.username}}">Account</a></li>
 				<li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/logout">Log Out</a></li>
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile/delete_account">Delete Account</a></li>
+
 				{% else %}
 				<li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/login">Login/Register</a></li>
 				{% endif %}
