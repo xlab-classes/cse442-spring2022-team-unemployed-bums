@@ -49,6 +49,9 @@ def index(request):
     }
 
     if request.method == 'GET':
+        if 'HTTP_REFERER' in request.META:
+            if "listingcreation" in request.META['HTTP_REFERER']:
+                context['message'] = "Created Listing"
         return render(request, 'home/index.html', context)
     else:
         if str(request.user) != "AnonymousUser":
