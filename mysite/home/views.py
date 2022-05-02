@@ -68,6 +68,7 @@ def index(request):
             )
             context['message'] = "Successful RSVP"
             print(key, value, "sending rsvp email")
+            rsvp(request)
         else:
             context['message'] = "You must log in to RSVP"
         return render(request, 'home/index.html', context)

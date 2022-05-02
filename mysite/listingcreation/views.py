@@ -36,8 +36,9 @@ def listingsubmission(request):
             eventmonth = form.cleaned_data["eventmonth"]
             eventyear = form.cleaned_data["eventyear"]
             eventdate = "{} {} {}".format(eventmonth, eventday, eventyear)
+            recurring = form.cleaned_data["recurring"]
             # print(request.user)
-            l = ListingCreationModel(title=title, description=description, author=author, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate)
+            l = ListingCreationModel(title=title, description=description, author=author, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate, recurring = recurring)
             l.save()
 
             # send notification to followers
@@ -67,18 +68,14 @@ def hidepost(request):
     items = dict(list(request.POST.items()))
     listing = listings.get(id=int(items['listing_id']))
     hidden = listing["hidden"]
-    print("post visibility before: " , hidden)
-    print("hidden type: " , type(hidden))
     if(hidden == False):
         ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(hidden="True")
-        print("hiding")
     else:
         ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(hidden="False")
-        print("showing")
     newlistings = ListingCreationModel.objects.all().values()
     newlisting = newlistings.get(id=int(items['listing_id']))
-    print("post visibility after: ", newlisting["hidden"])
-    return redirect('/home')
+    username = str(request.user)
+    return redirect("/profile/?user=" + username)
 
 def rsvp(request):
     listings = ListingCreationModel.objects.all().values()
