@@ -127,6 +127,26 @@ def add_follower(request):
 
     return redirect('/profile/?user=' + resp_following)
 
+def delete_account(request):
+    if request.method == 'GET':
+        return render(request, 'registration/deleteAccount.html')
+
+    if request.method == 'POST':
+        person = request.user
+        print(person)
+        
+        if User.objects.filter(username = person).exists():
+
+            deleteMe = User.objects.get(username = request.user)
+            deleteMe.delete()
+            print("account exists and should've be deleted")
+            return render(request, 'registration/user_not_found.html')
+        else:
+            print("Account doesn't exist")
+            return render(request, 'registration/profile.html')
+
+    print("goes here if there's no post request ")
+    return render(request, 'registration/deleteAccount.html')
 # class Index(View):
 #     #def profile(request):
 #     def get(self, request, *args, **kwargs):
