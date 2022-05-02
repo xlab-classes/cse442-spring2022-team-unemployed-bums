@@ -54,14 +54,22 @@ def index(request):
             key, value = items
             # send email to user here
             # send_mail(get_event_info(request.user, items['listing_id']))
-            send_mail(
-                subject='You RSVP\'d to an event!',
-                message=get_event_info(request.user, items['listing_id']),
-                from_email='EVNT RSVP',
-                recipient_list=[request.user.email],
-            )
-            context['message'] = "Successful RSVP"
-            print(key, value, "sending rsvp email")
+
+            # check if listing id author is the same as logged in user
+            listing = listings.get(id=int(items['listing_id']))
+            author = listing.author
+            if author == request.user:
+                print("same user")
+                context['message'] = "RSVP to self"
+            else:
+                send_mail(
+                    subject='You RSVP\'d to an event!',
+                    message=get_event_info(request.user, items['listing_id']),
+                    from_email='EVNT RSVP',
+                    recipient_list=[request.user.email],
+                )
+                context['message'] = "Successful RSVP"
+                print(key, value, "sending rsvp email")
         else:
             context['message'] = "You must log in to RSVP"
         return render(request, 'home/index.html', context)

@@ -60,13 +60,13 @@
 						{% for listing in listings reversed %}
 							<div style="margin: 15px 0px; display: flex;" class="container-listing">
 								<div class="left-content">
-									<img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
+									<!-- <img style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%" src="{{user.profile.image.url}}" alt="listing placeholder"> -->
 								</div>
 								<div style="margin-left: 20px;" class="right-content">
 								  <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
 								  <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
+								  <h6 style="display: inline">RSVP by {{ listing.eventdate }}</h6>
 								  <p>{{ listing.description }}</p>
-								  <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
 								  <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
 									<!-- <input style="display: inline; float: right;" type="button" value="Opt-Out"> -->
 								</div>

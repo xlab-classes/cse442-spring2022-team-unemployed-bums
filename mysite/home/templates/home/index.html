@@ -2,21 +2,14 @@
 {% block content %}
 {% load static %}
 <html lang="en">
-<head>
+<!-- <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evnt | Home</title>
 
-    <!-- {% if message != "" %}
-    <script>
-        alert('{{message}}');
-        console.log('{{message}}')
-    </script>
-    {% endif %} -->
-
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
-</head>
+</head> -->
 <body style="margin: 0px; padding: 0px; overflow-x: hidden; max-width: 100%;">
     <div style="display: block; width: 100%;" class="content-section;">
         <!-- <nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
@@ -41,6 +34,13 @@
             {% elif message == "Created Listing" %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Success!</strong> You have created an event posting.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message == "RSVP to self" %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Warning!</strong> You cannot RSVP to your own post.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,7 +81,7 @@
                     <div style="margin: 15px 0px; display: flex; width: 100%;" class="container-listing">
                         <div class="left-content">
                             <!-- <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder"> -->
-                            <img style="width: 150px;" src="{{user.profile.image.url}}" alt="listing placeholder">
+                            <img style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%" src="{{listing.author.profile.image.url}}" alt="listing placeholder">
 
                         </div>
                         
