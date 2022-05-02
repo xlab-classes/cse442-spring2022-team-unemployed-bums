@@ -1,13 +1,24 @@
+{% extends 'profileHome/base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 
 <html>
-
-<button> 
-    <!-- Make this button handle a click so that it can execute the code
-    Then do CSS-->
+    
+    <!--
+<button onclick="window.loacation.href='/deletionConfirmation'"> 
+         Make this button handle a click so that it can execute the code
+    Then do CSS
     Delete Account
 </button>
+-->
 
-
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button name="delete" value="account" onclick="window.loacation.href='/deleteAccount'"> 
+        Delete Account
+    </button>
+</form>
 
 </html>

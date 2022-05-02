@@ -5,6 +5,8 @@ from django.views import View
 from .models import Follow
 from django.contrib.auth.models import User
 from listingcreation.views import ListingCreationModel
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 def remove_follower(request):
@@ -47,23 +49,28 @@ def add_follower(request):
 
     return redirect('/profile/?user=' + resp_following)
 
+@csrf_exempt
 def deleteAccount(request):
     if request.method == 'GET':
+        return render(request, 'profileHome/deleteAccount.html')
+
+    if request.method == 'POST':
         person = request.user
         print(person)
-
+        
         if User.objects.filter(username = person).exists():
 
             deleteMe = User.objects.get(username = request.user)
             deleteMe.delete()
             print("exists ... deletes without button press")
-            return render(request, 'profileHome/deleteAccount.html')
+            return render(request, 'profileHome/user_not_found.html')
         else:
             print("Account doesn't exist")
-            return render(request, 'profileHome/deleteAccount.html')
+            return render(request, 'profileHome/profile.html')
 
+    print("goes here if there's no post request ")
     return render(request, 'profileHome/deleteAccount.html')
-
+     
 
 class Index(View):
     #def profile(request):
