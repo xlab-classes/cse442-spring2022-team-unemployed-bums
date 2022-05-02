@@ -10,8 +10,8 @@ yearchoices = [('2022', '2022'),('2023', '2023'),('2024', '2024')]
 
 class ListingCreationModel(models.Model):
     title = models.CharField(max_length=200)
-    # author = models.CharField(max_length=200, default="anonymous")
-    author = models.ForeignKey(User, related_name="author", on_delete=models.CASCADE)
+    #author = models.CharField(max_length=200, default="anonymous")
+    author = models.ForeignKey(User, related_name="author", on_delete=models.CASCADE, default="anonymous")
     created_on = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     eventdate = models.CharField(max_length=10, default="4/11/2022")
@@ -19,6 +19,9 @@ class ListingCreationModel(models.Model):
     sports = models.BooleanField()
     recreation = models.BooleanField()
     learning = models.BooleanField()
+    learning = models.BooleanField()
+    hidden = models.BooleanField(default=False)
+    rsvp = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
