@@ -22,4 +22,5 @@ appname = 'listingcreation'
 urlpatterns = [
     path('', views.creationpage, name = 'listingcreationindex'),
     path('submission/', views.listingsubmission),
+path('hidelisting/', views.hidepost, name='hidepost')
 ]

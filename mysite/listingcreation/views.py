@@ -36,8 +36,9 @@ def listingsubmission(request):
             eventmonth = form.cleaned_data["eventmonth"]
             eventyear = form.cleaned_data["eventyear"]
             eventdate = "{} {} {}".format(eventmonth, eventday, eventyear)
+            recurring = form.cleaned_data["recurring"]
             # print(request.user)
-            l = ListingCreationModel(title=title, description=description, author=author, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate)
+            l = ListingCreationModel(title=title, description=description, author=author, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate, recurring = recurring)
             l.save()
 
             # send notification to followers
@@ -60,3 +61,26 @@ def listingsubmission(request):
 def creationpage(request):
     form = CreateNewListing
     return render(request, 'listingcreationform.html', {"form":form})
+
+@csrf_exempt
+def hidepost(request):
+    listings = ListingCreationModel.objects.all().values()
+    items = dict(list(request.POST.items()))
+    listing = listings.get(id=int(items['listing_id']))
+    hidden = listing["hidden"]
+    if(hidden == False):
+        ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(hidden="True")
+    else:
+        ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(hidden="False")
+    newlistings = ListingCreationModel.objects.all().values()
+    newlisting = newlistings.get(id=int(items['listing_id']))
+    username = str(request.user)
+    return redirect("/profile/?user=" + username)
+
+def rsvp(request):
+    listings = ListingCreationModel.objects.all().values()
+    items = dict(list(request.POST.items()))
+    listing = listings.get(id=int(items['listing_id']))
+    count = int(listing["rsvp"]) + 1
+    ListingCreationModel.objects.filter(pk=int(items['listing_id'])).update(rsvp=count)
+    return None

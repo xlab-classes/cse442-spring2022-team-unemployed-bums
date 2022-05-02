@@ -62,12 +62,17 @@
 								<div class="left-content">
 									<!-- <img style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%" src="{{user.profile.image.url}}" alt="listing placeholder"> -->
 								</div>
-								<div style="margin-left: 20px;" class="right-content">
-								  <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
-								  <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
-								  <h6 style="display: inline">RSVP by {{ listing.eventdate }}</h6>
-								  <p>{{ listing.description }}</p>
-								  <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+								<div style="margin-left: 20px; width: 100%;" class="right-content">
+									<form action="/listingcreation/hidelisting/" method="POST">
+								  		<h1 style="margin-top: 0px;">{{ listing.title }}</h1>
+								  		<h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
+								  		<h6 style="display: inline">RSVP by {{ listing.eventdate }}</h6>
+								  		<p>{{ listing.description }}</p>
+										<h6>Recurring: {{ listing.recurring }}</h6>
+										<p>Hidden to Others: {{ listing.hidden }}</p>
+										<input style="display: inline; float: right;" type="submit" value="Hide Post" href="/profile/?user={{user.username}}">
+								  		<input type="hidden" name="listing_id" value="{{ listing.id }}"/>
+									</form>
 									<!-- <input style="display: inline; float: right;" type="button" value="Opt-Out"> -->
 								</div>
 							</div>

@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['128.205.32.39',
 		'www-student.cse.buffalo.edu',
-        'localhost']
+        'localhost', '127.0.0.1']
 
 
 # Application definition
