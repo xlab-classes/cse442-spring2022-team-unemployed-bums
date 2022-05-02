@@ -4,7 +4,9 @@
 
 {% block content %}
   {%  if user.is_authenticated %}
+  	{% if following == follower %}
 	<a href="{% url 'profile' %}" class="ml-2">Edit Profile </a>
+	{% endif %}
 	<div class = "content-section">
 		<div class="img-max">
 		<div class ="media">

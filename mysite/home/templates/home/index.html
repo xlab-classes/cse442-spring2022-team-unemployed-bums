@@ -75,7 +75,7 @@
                 <input type="submit" value="Filter">
             </form>
         </div>
-        <div style="width: 100%; display: flex; justify-content: center;" class="container-main">
+        <div style="width: 100%; display: flex; justify-content: center; background-color: white; border: 1px solid black" class="container-main">
             <div style="width: 50vw; padding: 15px;" class="container-feed">
                 {% for listing in listings reversed %}
                     <div style="margin: 15px 0px; display: flex;" class="container-listing">
@@ -87,7 +87,7 @@
                             <form action="/home/" method="POST">
                                 {% csrf_token %}
                                 <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
-                                <h5>Posted on {{ listing.created_on }} by <a href="/profile/?user={{listing.author}}" class="ml-2">{{listing.author }}</a> </h5>
+                                <h5>Posted on {{ listing.created_on }} by<a href="/profile/?user={{listing.author}}" class="ml-2">{{listing.author }}</a></h5>
                                 <h6 style="display: inline">RSVP by {{ listing.eventdate }}</h6>
                                 <p>{{ listing.description }}</p>
                                 <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
