@@ -58,6 +58,7 @@
 						
 			
 						{% for listing in listings reversed %}
+							{% if follower == following or listing.hidden == False%}
 							<div style="margin: 15px 0px; display: flex;" class="container-listing">
 								<div class="left-content">
 									<img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
@@ -67,6 +68,7 @@
 								  		<h1 style="margin-top: 0px;">{{ listing.title }}</h1>
 								  		<h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
 								  		<p>{{ listing.description }}</p>
+										<p>Tags: {{ listing.tags }}</p>
 								  		<p style="display: inline">RSVP by {{ listing.eventdate }}</p>
 										<h6>Recurring: {{ listing.recurring }}</h6>
 										{% if follower == following %}
@@ -79,6 +81,7 @@
 								</div>
 							</div>
 							<br>
+							{% endif %}
 						{% endfor %}
 					</div>
 				  </div>
@@ -97,4 +100,4 @@
   {% endif %}
   
           
-{% endblock %} 
+{% endblock %}
