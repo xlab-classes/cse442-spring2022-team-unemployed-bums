@@ -19,14 +19,14 @@ from Register import views as v
 from django.contrib.auth import views as auth_views 
 from django.conf.urls.static import static
 from django.conf import settings
-
+from home import views as h
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', v.register, name = "register"), 
     path('edit_profile/', v.profile, name ="profile"),
     path('profile/', v.userprofile, name ="userprofile"),
-    path('', include("main.urls")),
+    path('', h.index, name="homepage"),
     path('login/', auth_views.LoginView.as_view(), name ='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name = 'registration/logout.html'), name = 'logout'),
     path('authenticated/', v.authenticated, name = "authenticated"),
