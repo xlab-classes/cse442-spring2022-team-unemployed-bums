@@ -63,7 +63,6 @@ def index(request):
             listing = listings.get(id=int(items['listing_id']))
             author = listing.author
             if author == request.user:
-                print("same user")
                 context['message'] = "RSVP to self"
             else:
                 send_mail(
@@ -73,7 +72,6 @@ def index(request):
                     recipient_list=[request.user.email],
                 )
                 context['message'] = "Successful RSVP"
-                print(key, value, "sending rsvp email")
                 rsvp(request)
         else:
             context['message'] = "You must log in to RSVP"
@@ -81,7 +79,7 @@ def index(request):
 
 @csrf_exempt
 def filtered(request):
-    list_of_listings = ListingCreationModel.objects.all().values()
+    list_of_listings = ListingCreationModel.objects.all()
     final_listings = []
 
     form = Tagsform
@@ -96,7 +94,7 @@ def filtered(request):
             sort = form.cleaned_data["sortOption"]
 
             for listing in list_of_listings:
-                if (listing["hidden"] == False):
+                if (listing.hidden == False):
                     outd = False
                     sport = False
                     rec = False
@@ -105,31 +103,31 @@ def filtered(request):
                         final_listings.append(listing)
                     else:
                         if(outdoors == True):
-                            if (listing["outdoors"] == True):
+                            if (listing.outdoors == True):
                                 outd = True
                         else:
                             outd = True
                         if (sports == True):
-                            if (listing["sports"] == True):
+                            if (listing.sports == True):
                                 sport = True
                         else:
                             sport = True
                         if (recreation == True):
-                            if (listing["recreation"] == True):
+                            if (listing.recreation == True):
                                 rec = True
                         else:
                             rec = True
                         if (learning == True):
-                            if (listing["learning"] == True):
+                            if (listing.learning == True):
                                 learn = True
                         else:
                             learn = True
                         if(outd == True and sport == True and rec == True and learn == True):
                             final_listings.append(listing)
         if (sort == "mostpopular"):
-            final_listings.sort(key=itemgetter('rsvp'))
+            final_listings.sort(key=lambda l: l.rsvp)
         elif (sort == "leastpopular"):
-            final_listings.sort(key=itemgetter('rsvp'), reverse=True)
+            final_listings.sort(key=lambda l: l.rsvp, reverse=True)
 
         context = {
             'listings': final_listings,
