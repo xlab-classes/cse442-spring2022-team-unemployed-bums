@@ -58,6 +58,7 @@
 						
 			
 						{% for listing in listings reversed %}
+							{% if follower == following or listing.hidden == False%}
 							<div style="margin: 15px 0px; display: flex;" class="container-listing">
 								<div class="left-content">
 									<!-- <img style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%" src="{{user.profile.image.url}}" alt="listing placeholder"> -->
@@ -68,15 +69,20 @@
 								  		<h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
 								  		<h6 style="display: inline">RSVP by {{ listing.eventdate }}</h6>
 								  		<p>{{ listing.description }}</p>
+										<p>Tags: {{ listing.tags }}</p>
+								  		<p style="display: inline">RSVP by {{ listing.eventdate }}</p>
 										<h6>Recurring: {{ listing.recurring }}</h6>
+										{% if follower == following %}
 										<p>Hidden to Others: {{ listing.hidden }}</p>
 										<input style="display: inline; float: right;" type="submit" value="Hide Post" href="/profile/?user={{user.username}}">
+										{% endif %}
 								  		<input type="hidden" name="listing_id" value="{{ listing.id }}"/>
 									</form>
 									<!-- <input style="display: inline; float: right;" type="button" value="Opt-Out"> -->
 								</div>
 							</div>
 							<br>
+							{% endif %}
 						{% endfor %}
 					</div>
 				  </div>
@@ -95,4 +101,4 @@
   {% endif %}
   
           
-{% endblock %} 
+{% endblock %}
