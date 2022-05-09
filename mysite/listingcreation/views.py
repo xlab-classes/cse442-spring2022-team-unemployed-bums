@@ -37,8 +37,22 @@ def listingsubmission(request):
             eventyear = form.cleaned_data["eventyear"]
             eventdate = "{} {} {}".format(eventmonth, eventday, eventyear)
             recurring = form.cleaned_data["recurring"]
-            # print(request.user)
-            l = ListingCreationModel(title=title, description=description, author=author, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate, recurring = recurring)
+            tags = ""
+            if form.cleaned_data["sports"] == True:
+                tags = tags + "Sports"
+            if form.cleaned_data["outdoors"] == True:
+                if (tags != ""):
+                    tags = tags + ", "
+                tags = tags + "Outdoors"
+            if form.cleaned_data["recreation"] == True:
+                if (tags != ""):
+                    tags = tags + ", "
+                tags = tags + "Recreation"
+            if form.cleaned_data["learning"] == True:
+                if (tags != ""):
+                    tags = tags + ", "
+                tags = tags + "Learning"
+            l = ListingCreationModel(title=title, description=description, author=author, outdoors=outdoors, sports=sports, recreation=recreation, learning=learning, eventdate=eventdate, recurring= recurring, tags= tags)
             l.save()
 
             # send notification to followers

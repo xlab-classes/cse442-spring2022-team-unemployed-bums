@@ -18,7 +18,6 @@ listings = ListingCreationModel.objects.all()
 def get_event_info(username, listing_id):
     
     listing = listings.get(id=int(listing_id))
-    print(f"listing: {type(listing)}")
 
     if listing:
         author = listing.author.username
@@ -56,7 +55,6 @@ def index(request):
     else:
         if str(request.user) != "AnonymousUser":
             items = dict(list(request.POST.items()))
-            print(items)
             key, value = items
             # send email to user here
             # send_mail(get_event_info(request.user, items['listing_id']))
@@ -99,22 +97,22 @@ def filtered(request):
                         final_listings.append(listing)
                     else:
                         if(outdoors == True):
-                            if (listing["outdoors"] == outdoors):
+                            if (listing["outdoors"] == True):
                                 outd = True
                         else:
                             outd = True
                         if (sports == True):
-                            if (listing["sports"] == sports):
+                            if (listing["sports"] == True):
                                 sport = True
                         else:
                             sport = True
                         if (recreation == True):
-                            if (listing["recreation"] == recreation):
-                                recreation = True
+                            if (listing["recreation"] == True):
+                                rec = True
                         else:
                             rec = True
                         if (learning == True):
-                            if (listing["learning"] == learning):
+                            if (listing["learning"] == True):
                                 learn = True
                         else:
                             learn = True
@@ -130,10 +128,3 @@ def filtered(request):
             'tagsform': form
         }
         return render(request, 'home/index.html', context)
-
-    else:
-        context2 = {
-            'listings': list_of_listings,
-            'tagsform': form
-        }
-        return render(request, 'home/index.html', context2)

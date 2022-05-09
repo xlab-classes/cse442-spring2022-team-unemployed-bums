@@ -23,6 +23,7 @@ class ListingCreationModel(models.Model):
     hidden = models.BooleanField(default=False)
     rsvp = models.IntegerField(default=0)
     recurring = models.CharField(default="No", max_length=20)
+    tags = models.CharField(default="", max_length=250)
 
     def __str__(self):
         return self.title
