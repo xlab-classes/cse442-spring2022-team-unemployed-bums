@@ -1,0 +1,18 @@
+{% extends 'main/profilebase.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<html>
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button name="delete" value="account"> 
+        Delete Account
+    </button>
+</form>
+
+</html>
+
+{% endblock content %}

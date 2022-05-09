@@ -1,38 +1,76 @@
+{% extends "main/profilebase.html" %} 
+{% block content %}
 {% load static %}
 <html lang="en">
-<head>
+<!-- <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evnt | Home</title>
 
-    {% if message != "" %}
-    <script>
-        alert('{{message}}');
-        console.log('{{message}}')
-    </script>
-    {% endif %}
-
     <link rel="stylesheet" type="text/css" href="{% static 'home/style.css' %}">
-</head>
+</head> -->
 <body style="margin: 0px; padding: 0px; overflow-x: hidden; max-width: 100%;">
-    <div style="display: block; width: 100%;" class="container-body;">
-        <nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
+    <div style="display: block; width: 100%;" class="content-section;">
+        <!-- <nav style="background-color: #AFC1CF; display: flex; height: 50px; width: 100%;">
             <ul style="width: 100%; list-style-type: none; margin: 0px; padding: 0px;">
-                <li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="#">Home</a></li>
+                <li  style="float: left; display: inline; padding-left: 12px;" class="nav-items"><a href="/home">Home</a></li>
                 {% if user.is_authenticated %}
-                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile">Account</a></li>
+                <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/profile/?user={{user.username}}">Account</a></li>
                 <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/logout">Log Out</a></li>
                 {% else %}
                 <li style="float: right; display: inline; padding-left: 12px;" class="nav-items"><a href="/login">Login/Register</a></li>
                 {% endif %}
             </ul>
-        </nav>
-        <div style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
+        </nav> -->
+        {% if message != "" %}
+            {% if message == "Successful RSVP" %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have RSVP'd to an event.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message == "Created Listing" %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Success!</strong> You have created an event posting.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message == "RSVP to self" %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Warning!</strong> You cannot RSVP to your own post.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif message == "Filter"%}
+                <div class="alert alert-dark alert-dismissible fade show" role="alert">
+                    <strong>Filtered</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% else %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Please <strong><a href="/login" class="alert-link">log in</a></strong> to RSVP.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endif %}
+        
+        
+        
+        {% if listings|length > 0 %}
+        
+        <div class="btn create-btn" style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
             <button style="display: block;
             width: 50%;
             border: none;
-            background-color: #04AA6D;
+            background-color: #208AE3;
             padding: 14px 28px;
             font-size: 16px;
             cursor: pointer;
@@ -44,23 +82,29 @@
                 <input type="submit" value="Filter">
             </form>
         </div>
-        <div style="width: 100%; display: flex; justify-content: center;" class="container-main">
-            <div style="width: 50vw; background-color: #208AE3; padding: 15px;" class="container-feed">
-                {% for listing in listings %}
-                    <div style="margin: 15px 0px; display: flex;" class="container-listing">
+        <div style="width: 100%; display: flex; justify-content: center; background-color: white; border: 1px solid #dddddd" class="container-main">
+            <div style="width: 50vw; padding: 15px;" class="container-feed">
+                {% for listing in listings reversed %}
+                    <div style="margin: 15px 0px; display: flex; width: 100%;" class="container-listing">
                         <div class="left-content">
-                            <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder">
+                            <!-- <img style="width: 300px;" src="https://www.wolflair.com/wp-content/uploads/2017/01/placeholder.jpg" alt="listing placeholder"> -->
+                            <img style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%" src="{{listing.author.profile.image.url}}" alt="">
+
                         </div>
                         
-                        <div style="margin-left: 20px;" class="right-content">
+                        <div style="margin-left: 20px; width: 100%;" class="right-content">
                             <form action="/home/" method="POST">
                                 {% csrf_token %}
                                 <h1 style="margin-top: 0px;">{{ listing.title }}</h1>
-                                <h5>Posted on {{ listing.created_on }} by {{ listing.author }}</h5>
+                                <h5>Posted on {{ listing.created_on }} by <a href="/profile/?user={{listing.author}}" class="ml-2">{{listing.author }}</a> </h5>
+                                <h6 style="display: inline">Event Date:  {{ listing.eventdate }}</h6>
+                                <h6>Recurring: {{ listing.recurring }}</h6>
                                 <p>{{ listing.description }}</p>
-                                <p style="display: inline">RSVP by {{ listing.eventdate }}</p>
+                                <p>Tags: {{ listing.tags }}</p>
+                                <p>Number of People RSVP'd: {{ listing.rsvp }}</p>
                                 <input type="hidden" name="listing_id" value="{{ listing.id }}"/>
-                                <input style="display: inline; float: right;" type="submit" value="RSVP">
+                                <!-- <input style="display: inline; float: right;" type="submit" value="RSVP"> -->
+                                <input style="float: right;" class="btn btn-primary" type="submit" value="RSVP">
                             </form>
 
                             
@@ -70,10 +114,26 @@
                 {% endfor %}
             </div>
         </div>
-        <div style="display: flex; justify-content: space-around; height: 5vh; padding-top: 25px;">
+        {% else %}
+        <div style="text-align:center; margin-top: 35vh">
+            <h1>No Posts Found</h1>
+            <div class="btn create-btn" style="width: 100%; display: flex; justify-content: center;" id="create-listing-button">
+                <button style="display: block;
+                width: 50%;
+                border: none;
+                background-color: #208AE3;
+                padding: 14px 28px;
+                font-size: 20px;
+                cursor: pointer;
+                text-align: center;" onclick="location.href = '/listingcreation/';">Post an event</button>
+            </div>
+        </div>
+        {% endif %}
+        <!-- <div style="display: flex; justify-content: space-around; height: 5vh; padding-top: 25px;">
             <input style="height: 25px;" type="button" value="Prev">
             <input style="height: 25px;" type="button" value="Next">
-        </div>
+        </div> -->
     </div>
 </body>
+{% endblock content%}
 </html>
