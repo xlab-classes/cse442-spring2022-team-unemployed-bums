@@ -76,23 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-# Using msql-connector-python version 8.0.20 
-
-# DATABASES = {
-#     'default': {
-#         'NAME': 'mytestdb',
-#         'ENGINE': 'django.db.backends.mysql',
-#         'USER': 'test',
-#         'PASSWORD': 'Secret_1234',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#           'autocommit': True,
-#         }, 
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -101,19 +84,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'NAME': 'cse442_2022_spring_team_a_db',
-#         'ENGINE': 'mysql.connector.django',
-#         'USER': 'kevincou',
-#         'PASSWORD': '50322488',
-#         'HOST': 'oceanus.cse.buffalo.edu',
-#         'PORT': '3306',
-#         'OPTIONS': {
-#           'autocommit': True,
-#         },
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
